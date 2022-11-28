@@ -5,6 +5,7 @@ public class ResponseModel {
   private String responseMessage;
   private String responseDescription;
   private String responseTime;
+  private Object data;
 
   public String getResponseCode() {
     return responseCode;
@@ -36,5 +37,13 @@ public class ResponseModel {
 
   public void setResponseTime(String responseTime) {
     this.responseTime = responseTime;
+  }
+
+  public Object getData() {
+    return data;
+  }
+
+  public void setData(Object data) {
+    this.data = data;
   }
 }
