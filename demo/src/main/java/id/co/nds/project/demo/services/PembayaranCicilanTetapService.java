@@ -15,14 +15,14 @@ import id.co.nds.project.demo.exceptions.NotFoundException;
 import id.co.nds.project.demo.models.CicilanTetapRequestModel;
 import id.co.nds.project.demo.repos.CicilanTetapRepo;
 import id.co.nds.project.demo.specs.CicilanTetapSpec;
-import id.co.nds.project.demo.validators.CicilanTetapValidator;
+import id.co.nds.project.demo.validators.CommonValidator;
 
 @Service
 public class PembayaranCicilanTetapService implements Serializable {
   @Autowired
   private CicilanTetapRepo repo;
 
-  CicilanTetapValidator validator = new CicilanTetapValidator();
+  CommonValidator validator = new CommonValidator();
 
   public List<CicilanTetapEntity> findAllByCriteria(CicilanTetapRequestModel criteria)
       throws NotFoundException, ClientException {
