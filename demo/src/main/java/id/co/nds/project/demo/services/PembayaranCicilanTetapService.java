@@ -53,8 +53,7 @@ public class PembayaranCicilanTetapService implements Serializable {
   }
 
   @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = { Exception.class })
-  public CicilanTetapEntity update(CicilanTetapRequestModel requestModel)
-      throws Exception {
+  public CicilanTetapEntity update(CicilanTetapRequestModel requestModel) throws ClientException {
     String noTransaksi = requestModel.getNoTransaksi();
     String metode = requestModel.getMetodeBayar();
     Integer diskon = requestModel.getDiskon();
