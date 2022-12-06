@@ -10,10 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import id.co.nds.project.demo.entities.CicilanTetapEntity;
+import id.co.nds.project.demo.entities.CustomerEntity;
 import id.co.nds.project.demo.exceptions.ClientException;
 import id.co.nds.project.demo.exceptions.NotFoundException;
+import id.co.nds.project.demo.models.CicilanTetapModel;
 import id.co.nds.project.demo.models.CicilanTetapRequestModel;
 import id.co.nds.project.demo.repos.CicilanTetapRepo;
+import id.co.nds.project.demo.repos.CustomerRepo;
 import id.co.nds.project.demo.specs.CicilanTetapSpec;
 import id.co.nds.project.demo.validators.CommonValidator;
 
@@ -21,16 +24,40 @@ import id.co.nds.project.demo.validators.CommonValidator;
 public class PembayaranCicilanTetapService implements Serializable {
   @Autowired
   private CicilanTetapRepo repo;
+  @Autowired
+  private CustomerRepo customerRepo;
 
   CommonValidator validator = new CommonValidator();
 
-  public List<CicilanTetapEntity> findAllByCriteria(CicilanTetapRequestModel criteria)
+  public List<CicilanTetapModel> findAllByCriteria(CicilanTetapRequestModel model)
       throws NotFoundException, ClientException {
-    List<CicilanTetapEntity> list = new ArrayList<>();
-
+    CicilanTetapRequestModel criteria = new CicilanTetapRequestModel();
+    criteria.setNoTransaksi(model.getNoTransaksi());
+    criteria.setCustId(model.getCustId());
+    criteria.setCustName(model.getCustName());
+    criteria.setCicDateBegin(model.getCicDateBegin());
+    criteria.setCicDateEnd(model.getCicDateEnd());
+    criteria.setActorId(model.getActorId());
     validator.isNullCheck(criteria.getActorId(), "Actor ID");
 
-    repo.FindPembayaranCicilanTetap(criteria).forEach(list::add);
+    List<CicilanTetapModel> list = new ArrayList<>();
+    CicilanTetapSpec spec = new CicilanTetapSpec(criteria);
+    repo.findAll(spec).forEach((cte) -> {
+      CicilanTetapModel ctm = new CicilanTetapModel();
+      CustomerEntity c = customerRepo.findById(cte.getIdPelanggan()).orElse(null);
+      ctm.setNoTransaksi(cte.getNoTransaksi());
+      ctm.setTglTransaksi(cte.getCreatedDate().toString());
+      ctm.setIdPelanggan(cte.getIdPelanggan());
+      ctm.setNoKTP(c != null ? c.getKtp() : null);
+      ctm.setNamaPelanggan(c != null ? c.getNama() : null);
+      ctm.setCicilanKe(cte.getCicilanKe());
+      ctm.setTotalTagihan(cte.getTotalTagihan());
+      ctm.setStatusCicilan(cte.getStatusCicilan());
+      ctm.setTglAktifCicilan(cte.getTglAktifCicilan());
+      ctm.setTglJatuhTempoCicilan(cte.getTglJatuhTempoCicilan());
+
+      list.add(ctm);
+    });
     validator.isNullCheck(list);
 
     return list;

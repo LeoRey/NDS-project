@@ -1,7 +1,5 @@
 package id.co.nds.project.demo.models;
 
-import java.math.BigDecimal;
-// TODO: Remove this
 public class CicilanTetapModel {
   private String noTransaksi;
   private String tglTransaksi;
@@ -9,7 +7,7 @@ public class CicilanTetapModel {
   private String noKTP;
   private String namaPelanggan;
   private String cicilanKe;
-  private BigDecimal totalTagihan;
+  private Integer totalTagihan;
   private String statusCicilan;
   private String tglAktifCicilan;
   private String tglJatuhTempoCicilan;
@@ -46,11 +44,11 @@ public class CicilanTetapModel {
     this.noKTP = noKTP;
   }
 
-  public String getnamaPelanggan() {
+  public String getNamaPelanggan() {
     return namaPelanggan;
   }
 
-  public void setnamaPelanggan(String namaPelanggan) {
+  public void setNamaPelanggan(String namaPelanggan) {
     this.namaPelanggan = namaPelanggan;
   }
 
@@ -62,11 +60,11 @@ public class CicilanTetapModel {
     this.cicilanKe = cicilanKe;
   }
 
-  public BigDecimal getTotalTagihan() {
+  public Integer getTotalTagihan() {
     return totalTagihan;
   }
 
-  public void setTotalTagihan(BigDecimal totalTagihan) {
+  public void setTotalTagihan(Integer totalTagihan) {
     this.totalTagihan = totalTagihan;
   }
 

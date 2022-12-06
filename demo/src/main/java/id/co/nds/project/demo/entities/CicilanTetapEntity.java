@@ -1,5 +1,7 @@
 package id.co.nds.project.demo.entities;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,6 +11,38 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "CicilanTetap")
 public class CicilanTetapEntity {
+  public Timestamp getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Timestamp createdDate) {
+    this.createdDate = createdDate;
+  }
+
+  public Timestamp getUpdatedDate() {
+    return updatedDate;
+  }
+
+  public void setUpdatedDate(Timestamp updatedDate) {
+    this.updatedDate = updatedDate;
+  }
+
+  public Integer getCreatorId() {
+    return creatorId;
+  }
+
+  public void setCreatorId(Integer creatorId) {
+    this.creatorId = creatorId;
+  }
+
+  public Integer getUpdaterId() {
+    return updaterId;
+  }
+
+  public void setUpdaterId(Integer updaterId) {
+    this.updaterId = updaterId;
+  }
+
   @Id
   @Column(name = "no_transaksi")
   private String noTransaksi;
@@ -37,6 +71,18 @@ public class CicilanTetapEntity {
 
   @Column(name = "tgl_jatuh_tempo_cicilan")
   private String tglJatuhTempoCicilan;
+
+  @Column(name = "created_date")
+  private Timestamp createdDate;
+
+  @Column(name = "updated_date")
+  private Timestamp updatedDate;
+
+  @Column(name = "creator_id")
+  private Integer creatorId;
+
+  @Column(name = "updater_id")
+  private Integer updaterId;
 
   public String getNoTransaksi() {
     return noTransaksi;

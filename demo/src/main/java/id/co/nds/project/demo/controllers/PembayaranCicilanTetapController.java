@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import id.co.nds.project.demo.entities.CicilanTetapEntity;
 import id.co.nds.project.demo.exceptions.ClientException;
 import id.co.nds.project.demo.exceptions.NotFoundException;
+import id.co.nds.project.demo.models.CicilanTetapModel;
 import id.co.nds.project.demo.models.CicilanTetapRequestModel;
 import id.co.nds.project.demo.models.ResponseModel;
 import id.co.nds.project.demo.services.PembayaranCicilanTetapService;
@@ -29,7 +30,7 @@ public class PembayaranCicilanTetapController {
   public ResponseEntity<ResponseModel> DoSearchBayarCicTetap(@RequestBody CicilanTetapRequestModel body)
       throws NotFoundException, ClientException {
     ResponseModel response = new ResponseModel();
-    List<CicilanTetapEntity> list = service.findAllByCriteria(body);
+    List<CicilanTetapModel> list = service.findAllByCriteria(body);
 
     response.setResponseTime((new Timestamp(System.currentTimeMillis())).toString());
     response.setResponseCode(HttpStatus.OK.toString());
