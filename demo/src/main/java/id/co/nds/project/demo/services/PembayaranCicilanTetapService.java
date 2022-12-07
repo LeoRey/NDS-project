@@ -109,7 +109,7 @@ public class PembayaranCicilanTetapService implements Serializable {
   }
 
   @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = { Exception.class })
-  public CicilanTetapEntity update(CicilanTetapRequestModel requestModel) throws ClientException {
+  public CicilanTetapEntity update(CicilanTetapRequestModel requestModel) throws ClientException, NotFoundException {
     String noTransaksi = requestModel.getNoTransaksi();
     String metode = requestModel.getMetodeBayar();
     Integer diskon = requestModel.getDiskon();
@@ -132,7 +132,23 @@ public class PembayaranCicilanTetapService implements Serializable {
     criteria.setSelectedNoCic(selectedCic);
     CicilanTetapSpec spec = new CicilanTetapSpec(criteria);
     List<CicilanTetapEntity> list = new ArrayList<>();
-    repo.findAll(spec).forEach(list::add);
+    List<Integer> tagihanList = new ArrayList<>();
+    repo.findAll(spec).forEach(cte -> {
+      tagihanList.add(cte.getCicilanPokok() + cte.getTotalDenda() + cte.getBiayaPenyimpanan());
+      list.add(cte);
+    });
+    validator.isNullCheck(list);
+
+    Integer totaltagihan = 0;
+    for (Integer tagihan : tagihanList) {
+      if (diskon > tagihan) {
+        throw new ClientException("Diskon lebih besar dari pada tagihan");
+      }
+      totaltagihan += tagihan;
+    }
+    if (totaltagihan != jumlah) {
+      throw new ClientException("Tagihan tidak sama dengan jumlah pembayaran");
+    }
 
     ArrayList<String> errorList = new ArrayList<String>();
     for (CicilanTetapEntity entity : list) {
