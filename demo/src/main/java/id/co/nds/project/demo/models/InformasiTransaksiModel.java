@@ -7,7 +7,7 @@ public class InformasiTransaksiModel {
   private Integer totalNilaiPinjaman;
   private Integer tenor;
   private String tglJatuhTempo;
-  private String produkTransaksi;
+  private Integer produkTransaksi;
   private String namaProduk;
   private String keteranganproduk;
   private Integer totalKewajiban;
@@ -63,11 +63,11 @@ public class InformasiTransaksiModel {
     this.tglJatuhTempo = tglJatuhTempo;
   }
 
-  public String getProdukTransaksi() {
+  public Integer getProdukTransaksi() {
     return produkTransaksi;
   }
 
-  public void setProdukTransaksi(String produkTransaksi) {
+  public void setProdukTransaksi(Integer produkTransaksi) {
     this.produkTransaksi = produkTransaksi;
   }
 

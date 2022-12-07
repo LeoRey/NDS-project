@@ -1,9 +1,12 @@
 package id.co.nds.project.demo.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 public class ProdukEntity {
   @Id
@@ -16,6 +19,9 @@ public class ProdukEntity {
 
   @Column(name = "keterangan")
   private String keterangan;
+
+  @OneToMany(targetEntity = CicilanTetapEntity.class, mappedBy = "produk_transaksi")
+  private List<CicilanTetapEntity> cicilanTetapEntities;
 
   public Integer getId() {
     return id;

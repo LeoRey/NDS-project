@@ -17,6 +17,7 @@ import id.co.nds.project.demo.exceptions.ClientException;
 import id.co.nds.project.demo.exceptions.NotFoundException;
 import id.co.nds.project.demo.models.CicilanTetapModel;
 import id.co.nds.project.demo.models.CicilanTetapRequestModel;
+import id.co.nds.project.demo.models.InformasiTransaksiModel;
 import id.co.nds.project.demo.models.ResponseModel;
 import id.co.nds.project.demo.services.PembayaranCicilanTetapService;
 
@@ -44,7 +45,7 @@ public class PembayaranCicilanTetapController {
   public ResponseEntity<ResponseModel> DoGetDetailTagihanCic(@RequestBody CicilanTetapRequestModel body)
       throws ClientException, NotFoundException {
     ResponseModel response = new ResponseModel();
-    CicilanTetapEntity result = service.findByNoTransaksi(body);
+    InformasiTransaksiModel result = service.findByNoTransaksi(body);
 
     response.setResponseTime((new Timestamp(System.currentTimeMillis())).toString());
     response.setResponseCode(HttpStatus.OK.toString());

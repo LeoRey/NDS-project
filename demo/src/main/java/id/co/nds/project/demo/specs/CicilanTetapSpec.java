@@ -44,12 +44,12 @@ public class CicilanTetapSpec implements Specification<CicilanTetapEntity> {
 
     // Tanggal cicilan start criteria
     if (!validationUtil.isEmpty(model.getCicDateBegin())) {
-      p.getExpressions().add(criteriaBuilder.equal(root.get("tgl_cicilan_start"), model.getCicDateBegin()));
+      p.getExpressions().add(criteriaBuilder.greaterThan(root.get("tgl_aktif_cicilan"), model.getCicDateBegin()));
     }
 
     // Tanggal cicilan end criteria
     if (!validationUtil.isEmpty(model.getCicDateEnd())) {
-      p.getExpressions().add(criteriaBuilder.equal(root.get("tgl_cicilan_end"), model.getCicDateEnd()));
+      p.getExpressions().add(criteriaBuilder.lessThan(root.get("tgl_aktif_cicilan"), model.getCicDateEnd()));
     }
 
     query.orderBy(criteriaBuilder.asc(root.get("no_transaksi")));

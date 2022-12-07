@@ -11,51 +11,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "CicilanTetap")
 public class CicilanTetapEntity {
-  public Timestamp getCreatedDate() {
-    return createdDate;
-  }
-
-  public void setCreatedDate(Timestamp createdDate) {
-    this.createdDate = createdDate;
-  }
-
-  public Timestamp getUpdatedDate() {
-    return updatedDate;
-  }
-
-  public void setUpdatedDate(Timestamp updatedDate) {
-    this.updatedDate = updatedDate;
-  }
-
-  public Integer getCreatorId() {
-    return creatorId;
-  }
-
-  public void setCreatorId(Integer creatorId) {
-    this.creatorId = creatorId;
-  }
-
-  public Integer getUpdaterId() {
-    return updaterId;
-  }
-
-  public void setUpdaterId(Integer updaterId) {
-    this.updaterId = updaterId;
-  }
-
   @Id
   @Column(name = "no_transaksi")
   private String noTransaksi;
 
-  @JoinColumn(name = "id_pelanggan", referencedColumnName = "customer_id")
+  @JoinColumn(name = "id_pelanggan", referencedColumnName = "id")
   @Column(name = "id_pelanggan")
   private String idPelanggan;
 
-  @Column(name = "tgl_cicilan_start")
-  private String tglCicilanStart;
-
-  @Column(name = "tgl_cicilan_end")
-  private String tglCicilanEnd;
+  @JoinColumn(name = "produk_transaksi", referencedColumnName = "id")
+  @Column(name = "produk_transaksi")
+  private Integer produkTransaksi;
 
   @Column(name = "cicilan_ke")
   private String cicilanKe;
@@ -71,6 +37,27 @@ public class CicilanTetapEntity {
 
   @Column(name = "tgl_jatuh_tempo_cicilan")
   private String tglJatuhTempoCicilan;
+
+  @Column(name = "total_pinjaman")
+  private Integer totalPinjaman;
+
+  @Column(name = "tenor")
+  private Integer tenor;
+
+  @Column(name = "cicilan_pokok")
+  private Integer cicilanPokok;
+
+  @Column(name = "biaya_penyimpanan")
+  private Integer biayaPenyimpanan;
+
+  @Column(name = "total_denda")
+  private Integer totalDenda;
+
+  @Column(name = "total_pembayaran")
+  private Integer totalPembayaran;
+
+  @Column(name = "tanggal_bayar")
+  private Timestamp tanggalBayar;
 
   @Column(name = "created_date")
   private Timestamp createdDate;
@@ -98,22 +85,6 @@ public class CicilanTetapEntity {
 
   public void setIdPelanggan(String idPelanggan) {
     this.idPelanggan = idPelanggan;
-  }
-
-  public String getTglCicilanStart() {
-    return tglCicilanStart;
-  }
-
-  public void setTglCicilanStart(String tglCicilanStart) {
-    this.tglCicilanStart = tglCicilanStart;
-  }
-
-  public String getTglCicilanEnd() {
-    return tglCicilanEnd;
-  }
-
-  public void setTglCicilanEnd(String tglCicilanEnd) {
-    this.tglCicilanEnd = tglCicilanEnd;
   }
 
   public String getCicilanKe() {
@@ -154,5 +125,101 @@ public class CicilanTetapEntity {
 
   public void setTglJatuhTempoCicilan(String tglJatuhTempoCicilan) {
     this.tglJatuhTempoCicilan = tglJatuhTempoCicilan;
+  }
+
+  public Integer getProdukTransaksi() {
+    return produkTransaksi;
+  }
+
+  public void setProdukTransaksi(Integer produkTransaksi) {
+    this.produkTransaksi = produkTransaksi;
+  }
+
+  public Timestamp getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Timestamp createdDate) {
+    this.createdDate = createdDate;
+  }
+
+  public Timestamp getUpdatedDate() {
+    return updatedDate;
+  }
+
+  public void setUpdatedDate(Timestamp updatedDate) {
+    this.updatedDate = updatedDate;
+  }
+
+  public Integer getCreatorId() {
+    return creatorId;
+  }
+
+  public void setCreatorId(Integer creatorId) {
+    this.creatorId = creatorId;
+  }
+
+  public Integer getUpdaterId() {
+    return updaterId;
+  }
+
+  public void setUpdaterId(Integer updaterId) {
+    this.updaterId = updaterId;
+  }
+
+  public Integer getTotalPinjaman() {
+    return totalPinjaman;
+  }
+
+  public void setTotalPinjaman(Integer totalPinjaman) {
+    this.totalPinjaman = totalPinjaman;
+  }
+
+  public Integer getTenor() {
+    return tenor;
+  }
+
+  public void setTenor(Integer tenor) {
+    this.tenor = tenor;
+  }
+
+  public Integer getCicilanPokok() {
+    return cicilanPokok;
+  }
+
+  public void setCicilanPokok(Integer cicilanPokok) {
+    this.cicilanPokok = cicilanPokok;
+  }
+
+  public Integer getBiayaPenyimpanan() {
+    return biayaPenyimpanan;
+  }
+
+  public void setBiayaPenyimpanan(Integer biayaPenyimpanan) {
+    this.biayaPenyimpanan = biayaPenyimpanan;
+  }
+
+  public Integer getTotalDenda() {
+    return totalDenda;
+  }
+
+  public void setTotalDenda(Integer totalDenda) {
+    this.totalDenda = totalDenda;
+  }
+
+  public Integer getTotalPembayaran() {
+    return totalPembayaran;
+  }
+
+  public void setTotalPembayaran(Integer totalPembayaran) {
+    this.totalPembayaran = totalPembayaran;
+  }
+
+  public Timestamp getTanggalBayar() {
+    return tanggalBayar;
+  }
+
+  public void setTanggalBayar(Timestamp tanggalBayar) {
+    this.tanggalBayar = tanggalBayar;
   }
 }
